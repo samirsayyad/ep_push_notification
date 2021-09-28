@@ -1,0 +1,24 @@
+{
+  "name": "ep_push_notification",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samirsayyad/ep_push_notification.git"
+  },
+  "author": "Samir Sayyad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samirsayyad/ep_push_notification/issues"
+  },
+  "homepage": "https://github.com/samirsayyad/ep_push_notification#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-static": "^1.2.6",
+    "web-push": "^3.4.5"
+  }
+}

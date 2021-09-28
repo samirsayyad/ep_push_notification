@@ -1,0 +1,17 @@
+{
+	"parts": [
+		{
+			"name": "push_notification",
+			"pre": ["ep_etherpad-lite/webaccess", "ep_page_view/page_view"],
+			"post": ["ep_etherpad-lite/static"],
+			"client_hooks": {
+				"aceInitialized":"ep_push_notification/static/js/aceInitialized:aceInitialized"
+
+			},
+			"hooks": {
+				"expressCreateServer": "ep_push_notification/server/expressServer:expressCreateServer",
+				"handleMessage": "ep_push_notification/server/handleMessage"
+			}
+		}
+	]
+}
