@@ -1,6 +1,9 @@
-const subscribePushNotification = require("./methods/subscribePushNotification").subscribePushNotification;
+'use strict';
 
-exports.handleMessage = (hook_name, context, callback) => {
+const subscribePushNotification =
+require('./methods/subscribePushNotification').subscribePushNotification;
+
+exports.handleMessage = (_hookName, context, callback) => {
   let isRocketChatMessage = false;
   if (context) {
     if (context.message && context.message) {
@@ -23,8 +26,6 @@ exports.handleMessage = (hook_name, context, callback) => {
   const message = context.message.data;
 
   if (message.action === 'sendPushNotification') {
-    subscribePushNotification(message)
+    subscribePushNotification(message);
   }
-   
-  
 };

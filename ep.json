@@ -10,7 +10,8 @@
 			},
 			"hooks": {
 				"expressCreateServer": "ep_push_notification/server/expressServer:expressCreateServer",
-				"handleMessage": "ep_push_notification/server/handleMessage"
+				"handleMessage": "ep_push_notification/server/handleMessage",
+				"clientVars": "ep_push_notification/server/generalHooks/clientVars"
 			}
 		}
 	]
