@@ -5,13 +5,12 @@
 			"pre": ["ep_etherpad-lite/webaccess", "ep_page_view/page_view"],
 			"post": ["ep_etherpad-lite/static"],
 			"client_hooks": {
-				"aceInitialized":"ep_push_notification/static/js/aceInitialized:aceInitialized"
-
+				"aceInitialized":"ep_push_notification/static/dist/bundle"
 			},
 			"hooks": {
 				"expressCreateServer": "ep_push_notification/server/expressServer:expressCreateServer",
-				"handleMessage": "ep_push_notification/server/handleMessage",
-				"clientVars": "ep_push_notification/server/generalHooks/clientVars"
+				"clientVars": "ep_push_notification/server/clientVars:clientVars"
+
 			}
 		}
 	]
