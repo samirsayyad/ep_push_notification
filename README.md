@@ -5,7 +5,7 @@ This plugin will subscribe users of each pad automatically to the related topic 
 
 It's using rollup.js for converting ES6 to ES5 
 
-The confid need to setup in Etherpad settings.json 
+The config need to setup in Etherpad settings.json 
 
 ```json
   "ep_push_notification":{
