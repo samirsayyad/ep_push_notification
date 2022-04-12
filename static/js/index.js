@@ -13,7 +13,6 @@ export const aceInitialized = () => {
     // Otherwise, we need to ask the user for permission
     else {
       Notification.requestPermission().then((permission) => {
-        console.log(permission,"per ")
       // If the user accepts, let's create a notification
         if (permission === 'granted') {
           subscribeUserToTopic(
