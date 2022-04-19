@@ -7,18 +7,23 @@ export const aceInitialized = () => {
     } else if (Notification.permission === 'granted') {
       subscribeUserToTopic(
           clientVars.ep_push_notification.publicVapidKey,
-          clientVars.ep_push_notification.firebaseConfig, pad.getPadId(), pad.getUserId());
-    // eslint-disable-next-line brace-style
+          clientVars.ep_push_notification.firebaseConfig,
+          pad.getPadId(),
+          pad.getUserId()
+      );
+      // eslint-disable-next-line brace-style
     }
     // Otherwise, we need to ask the user for permission
     else {
       Notification.requestPermission().then((permission) => {
-      // If the user accepts, let's create a notification
+        // If the user accepts, let's create a notification
         if (permission === 'granted') {
           subscribeUserToTopic(
               clientVars.ep_push_notification.publicVapidKey,
               clientVars.ep_push_notification.firebaseConfig,
-              pad.getPadId(), pad.getUserId());
+              pad.getPadId(),
+              pad.getUserId()
+          );
         }
       });
     }

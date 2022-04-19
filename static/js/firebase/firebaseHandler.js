@@ -1,12 +1,11 @@
 import {initializeApp} from 'firebase/app';
 import {getMessaging, getToken, deleteToken} from 'firebase/messaging';
 
-const getServiceWorkerInstance =
-async () => await navigator.serviceWorker.register(
-    '../static/plugins/ep_push_notification/static/js/firebase-messaging-sw.js');
+const getServiceWorkerInstance = async () => await navigator.serviceWorker.register(
+    '../static/plugins/ep_push_notification/static/js/firebase-messaging-sw.js'
+);
 
-const getRegisterationToken =
-async (publicVapidKey, firebaseConfig) => {
+const getRegisterationToken = async (publicVapidKey, firebaseConfig) => {
   try {
     const app = initializeApp(firebaseConfig);
     const messaging = getMessaging(app);
@@ -18,7 +17,9 @@ async (publicVapidKey, firebaseConfig) => {
       console.error('[ep_push_notification]: deleteToken', e.message);
     }
 
-    const currentToken = await getToken(messaging, {vapidKey: publicVapidKey});
+    const currentToken = await getToken(messaging, {
+      vapidKey: publicVapidKey,
+    });
     console.log('[ep_push_notification]: CRT', currentToken);
     return currentToken;
   } catch (e) {
