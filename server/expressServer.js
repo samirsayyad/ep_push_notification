@@ -1,6 +1,8 @@
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const topicServices = require('./services/topicServices');
+const db = require('ep_etherpad-lite/node/db/DB');
+
 // const urlEncodedParser = bodyParser.urlencoded({extended:false});
 exports.expressCreateServer = (hookName, context) => {
   context.app.post(
@@ -8,15 +10,13 @@ exports.expressCreateServer = (hookName, context) => {
       jsonParser,
       async (req, res) => {
         try {
-          console.log('Got body:', req.body);
-
-          const {padId} = req.params;
+          const {padId, userId} = req.params;
           const {registrationToken} = req.body;
           const result = await topicServices.subscribeTokenToTopic(
               registrationToken,
               padId
           );
-          console.log('result', result);
+          db.set(`ep_push_notification_subscribeTokenToTopic:${userId}_${padId}`, result.data);
           res.status(201).json(result.data || {});
         } catch (error) {
           console.log('[ep_push_notification]:', error.message);
@@ -31,7 +31,6 @@ exports.expressCreateServer = (hookName, context) => {
       jsonParser,
       async (req, res) => {
         try {
-          console.log('Got body:', req.body);
           const {padId} = req.params;
           const {title, body} = req.body;
           const result = await topicServices.sendMessageToTopic(
