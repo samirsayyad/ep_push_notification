@@ -59,7 +59,8 @@ exports.expressCreateServer = (hookName, context) => {
         try {
           const {padId, userId} = req.params;
           const {title, body} = req.body;
-          const registrationToken = db.get(`ep_push_notification_registrationToken:${userId}_${padId}`) || false;
+          const registrationToken =
+          await db.get(`ep_push_notification_registrationToken:${userId}_${padId}`) || false;
           if (!registrationToken) {
             res.status(500).json({error: 'regiteration token required', code: 501});
             return;

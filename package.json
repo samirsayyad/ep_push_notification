@@ -3,7 +3,6 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
-	"type": "module",
 	"scripts": {
 		"test": "mocha  --recursive",
 		"lint": "eslint --fix .",
@@ -20,11 +19,19 @@
 	"eslintConfig": {
 		"root": true,
 		"extends": "etherpad/plugin",
+		"env": {
+			"browser": true,
+			"node": true,
+			"commonjs": true,
+			"es6": true,
+			"jquery": true
+		  },
 		"ignorePatterns": [
 			"/static/dist/*.js"
 		],
 		"globals": {},
 		"parserOptions": {
+			"ecmaVersion": 2020,
 			"sourceType": "module",
 			"allowImportExportEverywhere": true
 		}
