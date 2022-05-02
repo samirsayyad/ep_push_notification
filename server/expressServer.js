@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const topicServices = require('./services/topicServices');
 const db = require('ep_etherpad-lite/node/db/DB');
+const messageServices = require('./services/messageServices');
 
 // const urlEncodedParser = bodyParser.urlencoded({extended:false});
 exports.expressCreateServer = (hookName, context) => {
@@ -52,16 +53,22 @@ exports.expressCreateServer = (hookName, context) => {
   );
 
   context.app.post(
-      '/static/:padId/pluginfw/ep_push_notification/sendMessageToUser/:userId',
+      '/static/:padId/pluginfw/ep_push_notification/sendNotificationToUser/:userId',
       jsonParser,
       async (req, res) => {
         try {
           const {padId, userId} = req.params;
           const {title, body} = req.body;
-          const result = await topicServices.sendMessageToTopic(
+          const registrationToken = db.get(`ep_push_notification_registrationToken:${userId}_${padId}`) || false;
+          if (!registrationToken) {
+            res.status(500).json({error: 'regiteration token required', code: 501});
+            return;
+          }
+
+          const result = await messageServices.sendMessageToUser(
               title,
               body,
-              padId
+              registrationToken
           );
           res.status(201).json(result.data || {});
         } catch (error) {
