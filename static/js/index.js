@@ -1,4 +1,4 @@
-import {checkPermissionAndHandleTopic} from './handlePermission';
+import {checkPermissionAndHandleTopic} from './events/handlePermission';
 import {handleEvents} from './handleEvents';
 
 export const aceInitialized = () => {

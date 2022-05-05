@@ -1,4 +1,4 @@
-import subscribeUserToTopic from './firebase/subscribeUserToTopic';
+import subscribeUserToTopic from '../firebase/subscribeUserToTopic';
 
 export const checkPermissionAndHandleTopic = () => {
   console.log('checkPermissionAndHandleTopic');
