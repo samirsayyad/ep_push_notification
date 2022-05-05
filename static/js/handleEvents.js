@@ -17,10 +17,10 @@ export const handleEvents = () => {
       checkPermissionAndHandleTopic();
     }
     if (eventName === 'sendNotificationToUser') {
-      sendNotificationToUser(...data);
+      sendNotificationToUser(data);
     }
     if (eventName === 'notifyMe') {
-      notifyMe(...data);
+      notifyMe(data);
     }
   });
 };
