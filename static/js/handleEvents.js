@@ -1,5 +1,5 @@
 import {checkPermissionAndHandleTopic} from './events/handlePermission';
-import {sendNotificationToUser, notifyMe} from './events/handleNotifications';
+import {sendNotificationToUser, notifyMe, notifyAll} from './events/handleNotifications';
 
 const bindEvent = (element, eventName, eventHandler) => {
   if (element.addEventListener) {
@@ -21,6 +21,9 @@ export const handleEvents = () => {
     }
     if (eventName === 'notifyMe') {
       notifyMe(data);
+    }
+    if (eventName === 'notifyAll') {
+      notifyAll(data);
     }
   });
 };

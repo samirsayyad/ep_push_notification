@@ -45,8 +45,7 @@ exports.expressCreateServer = (hookName, context) => {
           );
           res.status(201).json(result.data || {});
         } catch (error) {
-          console.log('[ep_push_notification]:', error.message);
-
+          console.log('[sendMessageToTopic]:', error.message);
           res.status(500).send(error.message);
         }
       }

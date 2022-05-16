@@ -1,4 +1,7 @@
-export const sendNotificationToUser = async (...data) => {
+import {sendMessageToTopic} from '../firebase/topicHandler';
+import {sendMessageToAllSafariAgent} from '../agents/safariHandler';
+
+export const sendNotificationToUser = async (data) => {
   try {
     if (!data) return null;
     const [padId, userId, title, body] = data;
@@ -22,27 +25,43 @@ export const sendNotificationToUser = async (...data) => {
   }
 };
 
-export const notifyMe = async (...data) => {
-  alert(data.body);
-  // // Let's check if the browser supports notifications
-  // if (!('Notification' in window)) {
-  //   console.log('This browser does not support desktop notification');
-  //   return;
-  // }
+export const notifyMe = async (data) => {
+  // Let's check if the browser supports notifications
+  if (!('Notification' in window)) {
+    console.log('This browser does not support desktop notification');
+  }
 
-  // // Let's check whether notification permissions have already been granted
-  // else if (Notification.permission === 'granted') {
-  //   // If it's okay let's create a notification
-  //   new Notification(data.title, {body: data.body});
-  // }
+  // Let's check whether notification permissions have already been granted
+  else if (Notification.permission === 'granted') {
+    // If it's okay let's create a notification
+    new Notification(data.title, {body: data.body});
+  }
 
-  // // Otherwise, we need to ask the user for permission
-  // else if (Notification.permission !== 'denied') {
-  //   Notification.requestPermission().then((permission) => {
-  //     // If the user accepts, let's create a notification
-  //     if (permission === 'granted') {
-  //       new Notification(data.title, {body: data.body});
-  //     }
-  //   });
-  // }
+  // Otherwise, we need to ask the user for permission
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission().then((permission) => {
+      // If the user accepts, let's create a notification
+      if (permission === 'granted') {
+        new Notification(data.title, {body: data.body});
+      }
+    });
+  } else {
+    alert(data.body);
+  }
+};
+
+export const notifyAll = async (data) => {
+  try {
+    const {padId, userId, title, body} = data;
+    if (!padId || !userId || !title || !body) return null;
+
+    if (navigator.userAgent.indexOf('Safari') !== -1 &&
+     navigator.userAgent.indexOf('Chrome') === -1) {
+      sendMessageToAllSafariAgent(padId, userId, title, body);
+    }
+
+    sendMessageToTopic(padId, userId, title, body);
+  } catch (e) {
+    console.error('[notifyAll]: ', e);
+  }
 };

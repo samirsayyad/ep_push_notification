@@ -40,7 +40,7 @@ exports.sendMessageToTopic = async (title, body, topic) => new Promise((resolve,
         'Authorization': `Bearer ${configs.fcmServerKey}`,
       },
     });
-    resolve(result.data);
+    resolve(result.data || result);
   } catch (error) {
     console.error('sendMessageToTopic', error.message, error.response);
     reject(error.message);
