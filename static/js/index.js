@@ -16,7 +16,10 @@ export const handleClientMessage_CUSTOM = (hook, context, cb) => {
   // const currentUserId = pad.getUserId();
 
   if (context.payload.action === 'ep_push_notification_sendMessageToAllSafariAgent') {
-    notifyMe(context.payload.data);
+    if (navigator.userAgent.indexOf('Safari') !== -1 &&
+    navigator.userAgent.indexOf('Chrome') === -1) {
+      notifyMe(context.payload.data);
+    }
   }
   return [];
 };
