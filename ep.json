@@ -12,6 +12,7 @@
 			"hooks": {
 				"expressCreateServer": "ep_push_notification/server/expressServer:expressCreateServer",
 				"handleMessage": "ep_push_notification/server/handleMessage:handleMessage",
+				"eejsBlock_scripts":"ep_push_notification/hooks:eejsBlock_scripts",
 				"clientVars": "ep_push_notification/server/clientVars:clientVars"
 			}
 		}

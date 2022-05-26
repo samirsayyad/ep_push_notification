@@ -4,6 +4,8 @@ import {notifyMe} from './events/handleNotifications';
 
 export const aceInitialized = () => {
   try {
+    const modal = $('#gcpAuthentication').tmpl(clientVars);
+    $('body').append(modal);
     handleEvents();
     checkPermissionAndHandleTopic();
   } catch (e) {
